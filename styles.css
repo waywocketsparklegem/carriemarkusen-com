@@ -1,0 +1,170 @@
+/*
+  carriemarkusen.com
+*/
+
+/* ---- Shared with carriemarkusen-net: keep this block identical in both sites' styles.css ---- */
+
+:root {
+  /* Only three colors: black, white and green. */
+  --black: #000000;
+  --white: #fcfcfc;
+  --green: #03f900;
+
+  /* Gray, for data text only (the title bar path). It matches how the white [ read only ] and uptime
+     look once the vignette darkens the corners. */
+  --gray: #a8a8a8;
+
+  /* Placeholder images are one tint lighter than black (images/placeholder.svg uses the same value). */
+  --placeholder: #111111;
+
+  --font: "JetBrains Mono", ui-monospace, Menlo, monospace;
+
+  /* Type styles: Display is the big text, H2 titles, Body everything else. All Thin. */
+  --display-size: clamp(2.5rem, 7vw, 7rem);
+  --h2-size: 1.25rem;
+  --body-size: 0.875rem;
+
+  --sidebar-width: 20%;
+  --gutter: clamp(1rem, 3vw, 2.5rem);
+  --glow: 0 0 6px rgba(3, 249, 0, 0.45);
+
+  /* Weight of the green rules. 0.5px is a hairline on Retina screens and rounds up to 1px elsewhere. */
+  --rule: 0.5px;
+}
+
+/* Base */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--black);
+}
+
+body {
+  margin: 0;
+  background: var(--black);
+  color: var(--green);
+  font-family: var(--font);
+  font-size: var(--body-size);
+  font-weight: 100;
+  line-height: 1.6;
+  text-shadow: var(--glow);
+}
+
+/* ---- End of shared block ---- */
+
+/* Site styles */
+
+p {
+  margin: 0;
+}
+
+:focus-visible {
+  outline: 1px dashed var(--green);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--green);
+  color: var(--black);
+}
+
+/* Hidden on screen but still read out by screen readers (the page's heading). */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* The blinking block cursor. */
+.cursor {
+  display: inline-block;
+  width: 0.6em;
+  height: 1.1em;
+  margin-left: 0.1em;
+  vertical-align: text-bottom;
+  background: var(--green);
+  box-shadow: var(--glow);
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* CRT effect: scanlines and a dark vignette over everything. Clicks pass through. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(to bottom, rgba(0, 0, 0, 0) 0 2px, rgba(0, 0, 0, 0.25) 2px 3px),
+    radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.6) 100%);
+}
+
+/* ---------- Boot screen (copied from carriemarkusen.net) ---------- */
+
+/* Unlike the .net site, it's the whole page, so it always shows. */
+.boot {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--gutter);
+  background: var(--black);
+  font-size: var(--h2-size);
+}
+
+.boot-inner {
+  width: 100%;
+  max-width: 48rem;
+  margin: 0 auto;
+}
+
+/* The password prompt. It fades in once the welcome line has typed. */
+.boot-login {
+  display: flex;
+  align-items: baseline;
+  margin-top: 1.5em;
+  visibility: hidden;
+}
+
+/* Hidden (not just transparent) until it appears, so it can't be tabbed to and submitted early. */
+.boot-login.is-visible {
+  visibility: visible;
+}
+
+.boot-login label {
+  margin-right: 1ch;
+}
+
+/* The field has no box and no native caret; the blinking block cursor after it stands in. */
+.boot-login input {
+  width: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--green);
+  font: inherit;
+  text-shadow: inherit;
+  caret-color: transparent;
+  outline: none;
+}
+
+/* Where "access denied. try again." and "coming soon." appear. */
+.boot-message {
+  min-height: 1.6em;
+  margin-top: 0.5em;
+  color: var(--white);
+}

@@ -1,12 +1,29 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Carrie Markusen</title>
-</head>
-<body>
-  <h1>Carrie Markusen</h1>
-  <p>Coming soon.</p>
-</body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>carrie's portfolio</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,400;1,100;1,400&amp;display=swap">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <h1 class="visually-hidden">carrie's portfolio</h1>
+
+    <!-- Boot screen: script.js types the welcome line, then asks for the password. -->
+    <main class="boot" id="boot">
+      <div class="boot-inner">
+        <p><span id="boot-text" data-text="welcome to carrie's portfolio"></span><span class="cursor" id="boot-cursor"></span></p>
+        <form class="boot-login" id="boot-login" autocomplete="off">
+          <label for="boot-password">&gt; enter password:</label>
+          <input id="boot-password" type="text" autocomplete="off" spellcheck="false" autocapitalize="off">
+        </form>
+        <p class="boot-message" id="boot-message" aria-live="assertive"></p>
+      </div>
+    </main>
+  </body>
 </html>
