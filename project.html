@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en" class="grid-page">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>placeholder | carrie markusen</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,400;0,800;1,100;1,400&amp;display=swap">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <!-- Grid lines (r1-r8 across, c1-c8 down). Hidden in styles.css; unhide .grid-lines to check alignment. -->
+    <div class="grid-lines" aria-hidden="true">
+      <span class="h h1"></span><span class="h h2"></span><span class="h h3"></span><span class="h h4"></span>
+      <span class="h h5"></span><span class="h h6"></span><span class="h h7"></span><span class="h h8"></span>
+      <span class="v v1"></span><span class="v v2"></span><span class="v v3"></span><span class="v v4"></span>
+      <span class="v v5"></span><span class="v v6"></span><span class="v v7"></span><span class="v v8"></span>
+    </div>
+
+    <!-- Top band (r1 to r2): left header, page links on the right. -->
+    <header class="g-band g-band-top">
+      <p class="g-h1 g-left g-bold">[CLIENT]</p>
+      <nav aria-label="pages">
+        <a class="g-h1 g-about" href="about.html">ABOUT</a>
+        <a class="g-h1 g-portfolio" href="portfolio.html" aria-current="page">PORTFOLIO</a>
+      </nav>
+    </header>
+
+    <main>
+      <h1 class="visually-hidden">placeholder project</h1>
+
+      <!-- Project facts (r4, c2 to c4). -->
+      <dl class="project-facts">
+        <div class="fact">
+          <dt>ROLE</dt>
+          <dd>Placeholder</dd>
+        </div>
+        <div class="fact">
+          <dt>TIMELINE</dt>
+          <dd>Placeholder</dd>
+        </div>
+        <div class="fact">
+          <dt>HIGHLIGHTS</dt>
+          <dd>Placeholder</dd>
+        </div>
+      </dl>
+
+      <!-- Placeholder content image (c4 to c7, r2 to r7). -->
+      <div class="project-image" role="img" aria-label="placeholder image"></div>
+    </main>
+
+    <!-- Bottom band (r7 to r8): previous and next project. -->
+    <footer class="g-band g-band-bottom">
+      <p class="g-h1 g-left g-pager"><a href="project.html" aria-label="previous project">&lt;</a><a href="project.html" aria-label="next project">&gt;</a></p>
+    </footer>
+  </body>
+</html>

@@ -1,6 +1,6 @@
 /*
   carriemarkusen.com: the boot screen. Types the welcome line and asks for the password.
-  Copied from carriemarkusen.net's boot screen. Here the right password just says "coming soon."
+  Copied from carriemarkusen.net's boot screen. The right password opens the portfolio (portfolio.html).
 */
 
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -37,10 +37,17 @@ async function runBoot() {
   input.addEventListener("input", fitInput);
   fitInput();
 
-  // The right password says "coming soon."; anything else is denied. Either way the field clears.
-  login.addEventListener("submit", (event) => {
+  // The right password says "access granted." and opens the portfolio; anything else is denied and clears the field.
+  login.addEventListener("submit", async (event) => {
     event.preventDefault();
-    message.textContent = input.value === password ? "coming soon." : "access denied. try again.";
+    if (input.value === password) {
+      message.textContent = "access granted.";
+      input.disabled = true;
+      await wait(800);
+      window.location.href = "portfolio.html";
+      return;
+    }
+    message.textContent = "access denied. try again.";
     input.value = "";
     fitInput();
   });

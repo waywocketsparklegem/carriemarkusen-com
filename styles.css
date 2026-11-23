@@ -162,9 +162,803 @@ body::after {
   outline: none;
 }
 
-/* Where "access denied. try again." and "coming soon." appear. */
+/* Where "access granted." and "access denied. try again." appear. */
 .boot-message {
   min-height: 1.6em;
   margin-top: 0.5em;
   color: var(--white);
+}
+
+/* ---------- Portfolio pages (copied from carriemarkusen.net's portfolio, without its status bar) ---------- */
+
+h1,
+h2,
+ul,
+dl,
+dd,
+figure {
+  margin: 0;
+}
+
+h1,
+h2 {
+  font-size: var(--h2-size);
+  font-weight: inherit;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Hover and keyboard focus: inverted, like selected text in a terminal. */
+a:hover,
+a:focus-visible {
+  background: var(--green);
+  color: var(--black);
+  text-shadow: none;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  z-index: 30;
+  padding: 0.5rem 1rem;
+  background: var(--green);
+  color: var(--black);
+}
+
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+}
+
+/* Screen layout: the sidebar, then the window. */
+.screen {
+  display: grid;
+  min-height: 100vh;
+  min-height: 100dvh;
+  grid-template-rows: auto 1fr;
+}
+
+/* Sidebar: the file tree */
+
+.sidebar {
+  padding: var(--gutter);
+  border-bottom: var(--rule) solid var(--green);
+}
+
+.sidebar-label {
+  margin-bottom: 1rem;
+  color: var(--white);
+  font-weight: 400;
+}
+
+.tree-root {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  font-size: var(--h2-size);
+}
+
+/* Tree branches are drawn with borders: a vertical line on the list, a short tick on each item. */
+.tree ul {
+  margin-left: 0.5rem;
+}
+
+.tree li {
+  position: relative;
+  padding: 0.15rem 0 0.15rem 1.5rem;
+  border-left: 1px solid var(--white);
+}
+
+.tree li:last-child {
+  border-left-color: transparent;
+}
+
+.tree li::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -1px;
+  width: 1rem;
+  height: 0.95rem;
+  border-left: 1px solid var(--white);
+  border-bottom: 1px solid var(--white);
+}
+
+/* The current page: a pointer after it and white text. */
+.tree a[aria-current="page"] {
+  color: var(--white);
+}
+
+.tree a[aria-current="page"]::after {
+  content: " <";
+  color: var(--green);
+}
+
+.tree a[aria-current="page"]:hover,
+.tree a[aria-current="page"]:focus-visible {
+  color: var(--black);
+}
+
+.sidebar-meta {
+  margin-top: 2rem;
+  color: var(--white);
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+
+/* Main: the content window */
+
+.window {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.titlebar {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem var(--gutter);
+  border-bottom: var(--rule) solid var(--green);
+  color: var(--white);
+  font-size: 0.75rem;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.titlebar-path {
+  color: var(--gray);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.window:focus {
+  /* The window gets focus from the skip link; no outline around the whole window. */
+  outline: none;
+}
+
+.window-body {
+  display: grid;
+  gap: 2.5rem;
+  align-content: start;
+  padding: var(--gutter);
+}
+
+/* A command and what it printed. */
+.cmd {
+  color: var(--white);
+}
+
+.cmd::before {
+  content: "> ";
+  color: var(--white);
+}
+
+.output {
+  margin-top: 0.75rem;
+}
+
+.display {
+  font-size: var(--display-size);
+  font-weight: 100;
+  line-height: 1;
+}
+
+.lede {
+  max-width: 60ch;
+}
+
+/* Key and value pairs, like `role: designer`. */
+.facts {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.25rem 1.5rem;
+  max-width: 48rem;
+}
+
+.facts dt {
+  color: var(--white);
+}
+
+/* Images */
+
+.shot {
+  border: var(--rule) solid var(--green);
+  background: var(--placeholder);
+}
+
+.shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.shot figcaption {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.4rem 0.6rem;
+  border-top: var(--rule) solid var(--green);
+  color: var(--white);
+  font-size: 0.75rem;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  gap: 1rem;
+}
+
+/* Linked thumbnails: no inverted hover. */
+.gallery a:hover,
+.gallery a:focus-visible {
+  background: none;
+  color: inherit;
+}
+
+.gallery a:hover .shot,
+.gallery a:focus-visible .shot {
+  border-color: var(--green);
+}
+
+/* Previous / next project links. */
+.pager {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-top: 1.5rem;
+  border-top: var(--rule) dashed var(--green);
+}
+
+/* Wide screens: tree on the left, window on the right. Only the window scrolls. */
+@media (min-width: 50em) {
+  .screen {
+    height: 100vh;
+    height: 100dvh;
+    grid-template-columns: var(--sidebar-width) 1fr;
+    grid-template-rows: 1fr;
+  }
+
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 0;
+    border-right: var(--rule) solid var(--green);
+    overflow-y: auto;
+  }
+
+  .sidebar-meta {
+    margin-top: auto;
+  }
+
+  .window {
+    overflow-y: auto;
+  }
+
+  .titlebar {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background: var(--black);
+  }
+}
+
+/* Portfolio theme (class "portfolio-theme" on <html>): white background, black text and lines, no effects.
+   It swaps the color settings, so everything (sidebar, window, hovers, selection) follows. */
+html.portfolio-theme {
+  --black: #ffffff;
+  --white: #000000;
+  --green: #000000;
+  --gray: #000000;
+  --placeholder: #ffffff;  /* the frames behind images and their captions */
+  --glow: none;
+}
+
+/* No scanlines or vignette. */
+html.portfolio-theme body::after {
+  display: none;
+}
+
+/* The portfolio's thumbnail gallery: 3 columns on wide screens (one below 50em, like the rest of the layout).
+   Every thumbnail is cropped to the same 3:4 shape, so the rows line up. */
+.portfolio-gallery img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+}
+
+@media (min-width: 50em) {
+  .portfolio-gallery {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ---------- Golden-ratio grid pages (html.grid-page; the home page so far) ---------- */
+
+/* The original grid from the "layout experiment" PDFs (1280 x 791). Column lines are a share of the
+   window's width (vw), row lines a share of its height (dvh), so the grid stretches with the window.
+   c1/r1 is the outer margin; c2/r2 is one band in from it, the same distance on all four sides. */
+.grid-page {
+  /* The outer margins are square at every window shape: c1 and c2 are the same distances as r1 and r2
+     (measured on the height), and c7/c8 mirror them from the right. (In the PDFs' golden-ratio frame
+     these come to 2.103vw, 3.459vw, 96.541vw and 97.897vw.) The inner lines stretch with the width. */
+  --c1: var(--r1);
+  --c2: var(--r2);
+  --c3: 14.590vw;
+  --c4: 38.197vw;
+  --c5: 61.803vw;
+  --c6: 85.410vw;
+  --c7: calc(100vw - var(--r2));
+  --c8: calc(100vw - var(--r1));
+
+  --r1: 3.403vh;
+  --r2: 5.597vh;
+  --r3: 23.607vh;
+  --r4: 38.197vh;
+  --r5: 61.803vh;
+  --r6: 76.393vh;
+  --r7: 94.403vh;
+  --r8: 96.597vh;
+
+  /* Band height (r2 - r1). */
+  --band: 2.194vh;
+
+  /* H1: the band text (left header, page links, left footer). */
+  --g-h1-size: calc(var(--band) * 0.9);
+
+  /* About page colors. */
+  --red: #f93901;
+  --lime: #c1f234;
+  --teal: #5efa81;
+  --blue: #016bd6;
+
+  --grid-line: rgba(252, 252, 252, 0.55);
+}
+
+@supports (height: 1dvh) {
+  .grid-page {
+    --r1: 3.403dvh;
+    --r2: 5.597dvh;
+    --r3: 23.607dvh;
+    --r4: 38.197dvh;
+    --r5: 61.803dvh;
+    --r6: 76.393dvh;
+    --r7: 94.403dvh;
+    --r8: 96.597dvh;
+    --band: 2.194dvh;
+  }
+}
+
+/* White text with no glow and no scanlines or vignette (the shared block makes text green and glowing). */
+.grid-page body {
+  color: var(--white);
+  text-shadow: none;
+}
+
+.grid-page body::after {
+  display: none;
+}
+
+/* Bands: black covers over the top (window edge to r2) and bottom (r7 to the window edge), fixed in
+   place so the page scrolls underneath them. */
+.g-band {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  background: var(--black);
+}
+
+.g-band-top {
+  top: 0;
+  height: var(--r2);
+}
+
+.g-band-bottom {
+  top: var(--r7);
+  bottom: 0;
+}
+
+/* H1 text sits on its band's bottom edge (r2 at the top, r8 at the bottom). JetBrains Mono at
+   line-height 1: the baseline sits 0.14em above the bottom of the line, so the line's top goes
+   0.86em above the edge. */
+.g-h1 {
+  position: absolute;
+  margin: 0;
+  font-size: var(--g-h1-size);
+  font-weight: 100;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.g-band-top .g-h1 {
+  top: calc(var(--r2) - 0.86em);
+}
+
+.g-band-bottom .g-h1 {
+  top: calc(var(--r8) - var(--r7) - 0.86em);
+}
+
+.g-left {
+  left: var(--c2);
+}
+
+/* Page links: ABOUT ends on c6, PORTFOLIO on c7. The current page is underlined. */
+.g-about {
+  right: calc(100% - var(--c6));
+}
+
+.g-portfolio {
+  right: calc(100% - var(--c7));
+}
+
+/* Links: no hover change (the site's default inverts them in green). */
+.grid-page a:hover,
+.grid-page a:focus-visible {
+  background: none;
+  color: inherit;
+}
+
+.g-band a[aria-current="page"] {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+}
+
+/* ---------- About page ---------- */
+
+/* Body: 0.6 band, Thin, line height 1.5. Bold is ExtraBold (800). */
+.about-name,
+.about-facts,
+.about-jobs,
+.project-facts,
+.project-image {
+  position: absolute;
+  margin: 0;
+}
+
+.about-facts,
+.about-jobs,
+.project-facts {
+  top: var(--r4);
+  font-size: calc(var(--band) * 0.6);
+  line-height: 1.5;
+  /* Room below the content so the page can scroll it clear of the bottom band. */
+  padding-bottom: calc(100vh - var(--r7) + var(--band));
+}
+
+/* Name: ExtraBold, letter spacing 40 (0.04em), baseline on r3, from c2 to c5. Monospace letters are
+   0.6em wide: 15 letters and 14 gaps = 9.56em, so the size is (c5 - c2) / 9.56. The last letter's
+   trailing spacing is taken back with a negative margin. */
+.about-name {
+  left: var(--c2);
+  font-size: calc((var(--c5) - var(--c2)) / 9.56);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  white-space: nowrap;
+  top: calc(var(--r3) - 0.86em);
+}
+
+/* Left table, c2 to c4: label column c2 to c3, values c3 to c4. Each group has its own color.
+   Two blank lines between groups. */
+.about-facts,
+.project-facts {
+  left: var(--c2);
+  width: calc(var(--c4) - var(--c2));
+}
+
+.fact {
+  display: grid;
+  grid-template-columns: calc(var(--c3) - var(--c2)) 1fr;
+  color: var(--fact-color, var(--white));
+}
+
+.fact + .fact {
+  margin-top: 3em;
+}
+
+.fact dt {
+  font-weight: 800;
+}
+
+.fact dd + dd {
+  grid-column: 2;
+  margin-top: 1.5em;
+}
+
+.fact-red { --fact-color: var(--red); }
+.fact-green { --fact-color: var(--lime); }
+.fact-teal { --fact-color: var(--teal); }
+.fact-blue { --fact-color: var(--blue); }
+
+/* Experience, c4 to c7: text c4 to c6, the date right-aligned to c7 on the title's line.
+   One blank line between jobs. */
+.about-jobs {
+  left: var(--c4);
+  width: calc(var(--c7) - var(--c4));
+}
+
+.job {
+  display: grid;
+  grid-template-columns: calc(var(--c6) - var(--c4)) 1fr;
+}
+
+.job + .job {
+  margin-top: 1.5em;
+}
+
+.job h2 {
+  margin: 0;
+  font-size: inherit;
+  font-weight: 800;
+}
+
+.job-date {
+  grid-column: 2;
+  grid-row: 1;
+  font-weight: 800;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.job p:not(.job-date),
+.job ul {
+  grid-column: 1;
+}
+
+/* Bullets with a hanging indent, so wrapped lines start under the text. */
+.job li {
+  position: relative;
+  padding-left: 2.4ch;
+}
+
+.job li::before {
+  content: "\2022";
+  position: absolute;
+  left: 0;
+}
+
+/* ---------- Portfolio (home) and project pages ---------- */
+
+/* Home: a collage filling the grid inside the margins, c2 to c7 and r2 to r7 (5 columns x 5 rows of
+   cells, no gaps). Each tile spans one or more cells (--area, set on the tile). Placeholder tiles are
+   tints of black (--tint). */
+.collage {
+  position: absolute;
+  left: var(--c2);
+  top: var(--r2);
+  width: calc(var(--c7) - var(--c2));
+  height: calc(var(--r7) - var(--r2));
+  display: grid;
+  grid-template-columns:
+    calc(var(--c3) - var(--c2)) calc(var(--c4) - var(--c3)) calc(var(--c5) - var(--c4))
+    calc(var(--c6) - var(--c5)) calc(var(--c7) - var(--c6));
+  grid-template-rows:
+    calc(var(--r3) - var(--r2)) calc(var(--r4) - var(--r3)) calc(var(--r5) - var(--r4))
+    calc(var(--r6) - var(--r5)) calc(var(--r7) - var(--r6));
+}
+
+.tile {
+  display: block;
+  grid-area: var(--area);
+  background: var(--tint);
+}
+
+.grid-page .tile:hover,
+.grid-page .tile:focus-visible {
+  background: var(--tint);
+}
+
+/* Project pages: the left header (the client) is ExtraBold. */
+.g-h1.g-bold {
+  font-weight: 800;
+}
+
+/* Bottom band pager: < previous, > next. */
+.g-pager a + a {
+  margin-left: 1.4ch;
+}
+
+/* Placeholder content image: c4 to c7, r2 to r7. */
+.project-image {
+  left: var(--c4);
+  top: var(--r2);
+  width: calc(var(--c7) - var(--c4));
+  height: calc(var(--r7) - var(--r2));
+  background: #1b1b1b;
+}
+
+/* Grid lines: hidden. Remove display: none to check alignment. */
+.grid-lines {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.grid-lines span {
+  position: absolute;
+  background: var(--grid-line);
+}
+
+.grid-lines .h { left: 0; width: 100%; height: 0.5px; }
+.grid-lines .v { top: 0; height: 100%; width: 0.5px; }
+.grid-lines .h1 { top: var(--r1); } .grid-lines .h2 { top: var(--r2); }
+.grid-lines .h3 { top: var(--r3); } .grid-lines .h4 { top: var(--r4); }
+.grid-lines .h5 { top: var(--r5); } .grid-lines .h6 { top: var(--r6); }
+.grid-lines .h7 { top: var(--r7); } .grid-lines .h8 { top: var(--r8); }
+.grid-lines .v1 { left: var(--c1); } .grid-lines .v2 { left: var(--c2); }
+.grid-lines .v3 { left: var(--c3); } .grid-lines .v4 { left: var(--c4); }
+.grid-lines .v5 { left: var(--c5); } .grid-lines .v6 { left: var(--c6); }
+.grid-lines .v7 { left: var(--c7); } .grid-lines .v8 { left: var(--c8); }
+
+/* ---------- Portrait tablet and smaller (1000px wide and under) ---------- */
+
+/* The layout uses only the grid's left side, from the window's edge to c4, stretched to the full
+   width: c3 is 38.197vw (old c4 is the window's right edge). The outer margins stay square (c1 = r1,
+   c2 = r2). Content stops one c2 in from the right, mirroring the left (--edge). Rows don't change. Pages flow top to bottom
+   instead of sitting on fixed lines, from r4 (r2 on project pages). */
+@media (max-width: 1000px) {
+  .grid-page {
+    --c3: 38.197vw;
+    --edge: calc(100vw - var(--c2));
+    /* The fixed bar starts one band above its text's top. */
+    --bar-top: calc(var(--r8) - var(--g-h1-size) * 0.86 - var(--band));
+  }
+
+  /* Top band keeps only the left header. Its page links move into the bottom band, which becomes a
+     fixed black bar: left footer on the left, ABOUT in the middle, PORTFOLIO on the right. */
+  /* The top band scrolls away with the page instead of staying fixed. */
+  .g-band-top {
+    position: absolute;
+    z-index: 11;
+  }
+
+  .g-band-top nav {
+    position: fixed;
+    top: var(--bar-top);
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: var(--black);
+  }
+
+  /* The left footer (or the pager) stays in the fixed bar, on the left. The footer element itself
+     stays in the page's flow as empty room under the content, so the page scrolls clear of the bar. */
+  .g-band-bottom {
+    position: static;
+    height: auto;
+    background: none;
+    padding-bottom: calc(100vh - var(--bar-top) + var(--band));
+  }
+
+  .g-band-bottom .g-h1 {
+    position: fixed;
+    z-index: 12;
+    left: var(--c2);
+    top: calc(var(--r8) - 0.86em);
+  }
+
+  .g-band-top nav .g-h1 {
+    top: calc(var(--r8) - var(--bar-top) - 0.86em);
+  }
+
+  .g-about {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+  }
+
+  .g-portfolio {
+    right: var(--c2);
+  }
+
+  /* Content in one flowing column from c2 to --edge, then one r3-r4 height before the left footer. */
+  main {
+    display: flex;
+    flex-direction: column;
+    padding: var(--r4) var(--c2) calc(var(--r4) - var(--r3));
+  }
+
+  main:has(.project-image),
+  main:has(.collage) {
+    padding-top: var(--r2);
+  }
+
+  /* Home collage: two columns (c2 to c3, c3 to --edge); rows repeat the r2 to r7 row heights. */
+  .collage {
+    position: static;
+    width: auto;
+    height: auto;
+    grid-template-columns: calc(var(--c3) - var(--c2)) 1fr;
+    grid-template-rows: none;
+    grid-auto-rows:
+      calc(var(--r3) - var(--r2)) calc(var(--r4) - var(--r3)) calc(var(--r5) - var(--r4))
+      calc(var(--r6) - var(--r5)) calc(var(--r7) - var(--r6));
+    grid-auto-flow: dense;
+  }
+
+  /* Tiles flow in order; the bigger ones span both columns. */
+  .tile {
+    grid-area: auto;
+  }
+
+  .tile-wide {
+    grid-column: span 2;
+  }
+
+  .about-facts,
+  .about-jobs,
+  .project-facts,
+  .project-image {
+    position: static;
+    width: auto;
+    padding-bottom: 0;
+  }
+
+  /* Name: still on r3, now running c2 to --edge. */
+  .about-name {
+    font-size: calc((var(--edge) - var(--c2)) / 9.56);
+  }
+
+  /* Experience: one r3-r4 height below the facts, in the same two columns: the date on the left
+     (c2 to c3), the job on the right (c3 to --edge). */
+  .about-jobs {
+    margin-top: calc(var(--r4) - var(--r3));
+  }
+
+  .job {
+    grid-template-columns: calc(var(--c3) - var(--c2)) 1fr;
+  }
+
+  .job-date {
+    grid-column: 1;
+    grid-row: 1;
+    text-align: left;
+  }
+
+  .job h2 {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .job p:not(.job-date),
+  .job ul {
+    grid-column: 2;
+  }
+
+  /* Project pages: the image first (full width, square), then the facts two blank lines below. */
+  .project-image {
+    order: -1;
+    aspect-ratio: 1;
+    height: auto;
+  }
+
+  .project-facts {
+    margin-top: calc(var(--band) * 1.8);
+  }
+
+  /* Grid lines: c1 to c3, plus the right content edge. */
+  .grid-lines .v4 { left: var(--edge); }
+  .grid-lines .v5,
+  .grid-lines .v6,
+  .grid-lines .v7,
+  .grid-lines .v8 { display: none; }
 }
