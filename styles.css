@@ -798,6 +798,16 @@ html.portfolio-theme body::after {
   background: var(--grid-line);
 }
 
+/* Adding ?grid to a page's address (about.html?grid) shows its grid lines, 1px wide: a one-line script in each
+   grid page's head adds the show-grid class. The .net site's portfolio-grid page uses this for its grid on/off
+   buttons on its framed copy of the about page. */
+.show-grid .grid-lines {
+  display: block;
+}
+
+.show-grid .grid-lines .h { height: 1px; }
+.show-grid .grid-lines .v { width: 1px; }
+
 .grid-lines .h { left: 0; width: 100%; height: 0.5px; }
 .grid-lines .v { top: 0; height: 100%; width: 0.5px; }
 .grid-lines .h1 { top: var(--r1); } .grid-lines .h2 { top: var(--r2); }
